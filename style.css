@@ -1,0 +1,159 @@
+/* font */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+:root{
+    ---colorF: #FFFFFF;
+    ---color0: #000000;
+    ---color1: #9B3531;
+    ---color2: #EFE3D1;
+    ---color3: #c8795b;
+    ---color3: #9A5746;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+html {
+  font-size: 62.5%;
+  /* Hack para box model */
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto";
+  font-size: 16px;
+  line-height: 24px;
+  color: #333;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://images.pexels.com/photos/13444726/pexels-photo-13444726.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+.help {
+  border: var(---color3) solid 2px;
+  margin-bottom: 5px;
+}
+
+/* Contenido principal */
+.contenido-principal {
+  width: 750px;
+  padding: 20px;
+  background: rgba(200, 121, 91, 0.5); /* Fondo semi-transparente */
+  backdrop-filter: blur(10px); /* Aplica el desenfoque al fondo */
+  border-radius: 5px;
+}
+
+/* Caja de vida, ahorcado */
+.caja-informacion {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 250px;
+  padding: 20px;
+  border-radius: 5px;
+}
+.caja-vidas {
+    background-color: var(---color3);
+    padding: 10px;
+    color: var(---color2);
+    border-radius: 5px;
+}
+
+.caja-vidas label{
+    font-weight: bold;
+}
+
+.caja-vidas-restantes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  font-size: 30px;
+}
+
+/* caja de la palabra */
+.caja-palabra {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  background-color: var(---color3);
+  border-radius: 5px;
+  
+}
+.letra-palabra {
+  /* border-bottom: 2px var(---colorF) solid;
+  width: 30px;
+  display: flex;
+  justify-content: center; */
+}
+
+.letra-palabra {
+  font-family: "Roboto";
+  font-size: 24px;
+  font-weight: bold;
+  color: var(---colorF);
+}
+
+/* Caja del teclado */
+.caja-teclado {
+  padding: 10px;
+}
+.letras button {
+  margin: 5px;
+  width: 40px;
+  height: 30px;
+  background-color: var(---color3);
+  border: var(---color0) 1px solid;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.letras button:hover{
+    background-color: var(---color1);
+    color: var(---colorF);
+}
+
+.letras-arriba,
+.letras-centro,
+.letras-abajo {
+  max-width: 750px;
+  display: flex;
+  justify-content: center;
+}
+.ahorcado-container {
+  position: relative;
+  width: 300px;
+  height: 269px;
+  /* margin: 20px auto;
+  border-bottom: 1px solid #000;
+  background: #f0f0f0; */
+}
+
+.parte {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.parte img {
+  width: 100%;
+  height: auto;
+}
