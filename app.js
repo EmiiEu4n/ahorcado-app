@@ -1,4 +1,21 @@
 // Variables globales --------------------------
+// Array de palabras posibles
+let palabras = [
+  "LAPIZ",
+  "CUADERNO",
+  "LAPICERO",
+  "PLUMA",
+  "BORRADOR",
+  "SACAPUNTAS",
+  "MESA",
+  "SILLA",
+  "PIZARRON",
+  "VENTILADOR",
+  "FOCO",
+  "LIBROS",
+  "MOCHILA",
+  "LONCHERA",
+];
 
 // Variables de juego
 let letra;
@@ -46,13 +63,13 @@ letrasDistribuidas.forEach((grupo, index) => {
 // Fin de logica de las teclas de la fantalla --------------
 
 if (palabra === "-") {
-  iniciarJuego();
+  IniciarJuego();
 }
 
-function iniciarJuego() {
+function IniciarJuego() {
   palabrasUsadas = Array("-");
   letra = "-";
-  palabra = "LAPIZ";
+  palabra = palabras[Math.floor(Math.random() * palabras.length)];
   longitud = palabra.length;
   letrasAdivinadas = Array(longitud).fill("_"); // Inicializar con "_"
   palabraAdivinarElement.innerText = letrasAdivinadas.join(" ");
@@ -62,22 +79,33 @@ function iniciarJuego() {
   vidasRestantes = 10; // Número máximo de vidasRestantess (10 partes del cuerpo)
 
   // Borrar en producción solo es visual
-  console.log("------------------Iniciar Juego------------------")
-  console.log({ palabrasUsadas });
-  console.log("Letra:", letra);
-  console.log("Palabra:", palabra);
-  console.log("Longitud: ", longitud);
-  console.log({ letrasAdivinadas });
-  console.log("Estado de palabra:", estadoPalabra);
-  console.log("Letra adivinada:", letraAdivinada);
-  console.log("partes de muñeco:",partesMunieco );
-  console.log("Vidas restantes:", vidasRestantes);
+  // console.log("------------------Iniciar Juego------------------");
+  // console.log({ palabrasUsadas });
+  // console.log("Letra:", letra);
+  // console.log("Palabra:", palabra);
+  // console.log("Longitud: ", longitud);
+  // console.log({ letrasAdivinadas });
+  // console.log("Estado de palabra:", estadoPalabra);
+  // console.log("Letra adivinada:", letraAdivinada);
+  // console.log("partes de muñeco:", partesMunieco);
+  // console.log("Vidas restantes:", vidasRestantes);
+  // Seleccionamos todos los botones de letras
+  const botones = document.querySelectorAll(
+    ".letras-arriba button, .letras-centro button, .letras-abajo button"
+  );
+
+  // Recorremos todos los botones y reseteamos el estilo y el estado deshabilitado
+  botones.forEach((boton) => {
+    boton.style = ""; // Restablecer el estilo al estado original (sin estilos inline)
+    boton.disabled = false; // Habilitar el botón
+  });
 }
 
 function AdivinarLetra(boton) {
-  console.log("------------------Adivinar Letra------------------")
+  // Borrar en producción solo es visual
+  // console.log("------------------Adivinar Letra------------------");
   letra = boton.getAttribute("data-letter"); // Obtener la letra del atributo
-  console.log("Se presionó una letra:", letra);
+  // console.log("Se presionó una letra:", letra);
   boton.disabled = true; // Deshabilitar el botón
   letraAdivinada = false; // Variable para determinar si la letra está en la palabra
 
@@ -89,41 +117,41 @@ function AdivinarLetra(boton) {
     }
   });
 
-  console.log("Letra adivinada:", letraAdivinada)
+  // console.log("Letra adivinada:", letraAdivinada);
   // Llamar a la función de pintado de tecla fuera del bucle
   PintarTecla(letra, letraAdivinada);
 }
 
 function PintarTecla(letra, letraAdivinada) {
-  console.log("------------------Pintar Tecla------------------")
+  // console.log("------------------Pintar Tecla------------------");
   const boton = document.querySelector(`button[data-letter="${letra}"]`);
 
   if (letraAdivinada) {
     boton.style = "background-color: green; color: white;";
     letraAdivinada = "-";
-    
-    console.log("Tecla pintada verde:", letra);
-    console.log("Letra adivinada:", letraAdivinada)
+
+    // console.log("Tecla pintada verde:", letra);
+    // console.log("Letra adivinada:", letraAdivinada);
     MostrarLetrasCoincidentes();
   } else {
     boton.style = "background-color: red; color: white;";
     letraAdivinada = "-";
 
-    console.log("Tecla pintada en rojo:", letra);
-    console.log("Letra adivinada:", letraAdivinada)
+    // console.log("Tecla pintada en rojo:", letra);
+    // console.log("Letra adivinada:", letraAdivinada);
     PenalizarIntento();
   }
 }
 
 function MostrarLetrasCoincidentes() {
-  console.log("------Mostrar Letras Coincidentes------")
+  console.log("------Mostrar Letras Coincidentes------");
 
   palabraAdivinarElement.innerText = letrasAdivinadas.join(" ");
   VerificarEstadoPalabra(letrasAdivinadas);
   letra = "-";
 
-  console.log("Letras adivinadas:", letrasAdivinadas)
-  console.log("Letra:", letra)
+  console.log("Letras adivinadas:", letrasAdivinadas);
+  console.log("Letra:", letra);
 }
 
 function PenalizarIntento() {
@@ -155,8 +183,8 @@ function MostrarParteMunieco(vidasRestantes) {
 }
 
 function VerificarEstadoPalabra(letrasAdivinadas) {
-  console.log("------Verificar Estado de Palabra------")
-  
+  // console.log("------Verificar Estado de Palabra------");
+
   if (!letrasAdivinadas.includes("_")) {
     estadoPalabra = "completo";
   } else {
@@ -167,11 +195,70 @@ function VerificarEstadoPalabra(letrasAdivinadas) {
 
 function VerificarEstadoJuego() {
   if (vidasRestantes > 0 && estadoPalabra == "completo") {
-    alert("¡Felicidades! Has adivinado la palabra. [ " + palabra + " ]");
+    Swal.fire({
+      title: "¡Felicidades! 😎",
+      text: "Has adivinado la palabra: " + palabra,
+      confirmButtonText: "Siguiente Palabra",
+    });
+    SiguientePalabra();
   } else if (vidasRestantes < 1 && estadoPalabra == "incompleto") {
-    alert("¡Has perdido! La palabra era " + palabra);
-
-    iniciarJuego();
+    Swal.fire({
+      title: "¡Has perdido! 😢",
+      text: "La palabra era " + palabra,
+      confirmButtonText: "Jugar Otra Vez",
+      
+      // preConfirm: () => {
+      //   // Esta función se ejecutará cuando el usuario haga clic en el botón "Jugar Otra Vez"
+      //   palabra = "-"; // Resetear la palabra
+      //   return new Promise((resolve) => {
+          
+      //   });
+      // },
+    });
+    setTimeout(() => location.reload(), 2000);
   }
 }
 
+function SiguientePalabra() {
+  // Ingresar a palabras usadas la palabra adivinada
+  palabrasUsadas.push(palabra);
+  // Quitamos la palabra del array original
+  palabras = palabras.filter((item) => item != palabra);
+  // Asignamos la nueva palabra
+  palabra = palabras[Math.floor(Math.random() * palabras.length)];
+  // Operador IsAWiner Preguntamos si existen todavia palabras
+  if (palabras.length != 0) {
+    longitud = palabra.length;
+  } else {
+    alert("¡Enhorabuena!, te has salvado. Eres el ganador.");
+    setTimeout(() => location.reload(), 2000);
+  }
+  letrasAdivinadas = Array(longitud).fill("_"); // Inicializar con "_"
+  palabraAdivinarElement.innerText = letrasAdivinadas.join(" ");
+  estadoPalabra = "incompleto";
+  letraAdivinada = "-";
+
+  // Borrar en producción solo es visual
+  // console.log("------------------Siguiente Palabra------------------");
+  // console.log({ palabrasUsadas });
+  // console.log("Palabras que quedan:", palabras);
+  // console.log("Letra:", letra);
+  // console.log("Palabra:", palabra);
+  // console.log("Longitud: ", longitud);
+  // console.log({ letrasAdivinadas });
+  // console.log("Estado de palabra:", estadoPalabra);
+  // console.log("Letra adivinada:", letraAdivinada);
+  // console.log("partes de muñeco:", partesMunieco);
+  // console.log("Vidas restantes:", vidasRestantes);
+
+  // Seleccionamos todos los botones de letras
+  const botones = document.querySelectorAll(
+    ".letras-arriba button, .letras-centro button, .letras-abajo button"
+  );
+
+  // Recorremos todos los botones y reseteamos el estilo y el estado deshabilitado
+  botones.forEach((boton) => {
+    boton.style = ""; // Restablecer el estilo al estado original (sin estilos inline)
+    boton.disabled = false; // Habilitar el botón
+  });
+}
