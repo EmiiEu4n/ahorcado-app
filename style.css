@@ -1,13 +1,13 @@
 /* font */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-:root{
-    ---colorF: #FFFFFF;
-    ---color0: #000000;
-    ---color1: #9B3531;
-    ---color2: #EFE3D1;
-    ---color3: #c8795b;
-    ---color3: #9A5746;
+:root {
+  ---colorF: #ffffff;
+  ---color0: #000000;
+  ---color1: #9b3531;
+  ---color2: #efe3d1;
+  ---color3: #c8795b;
+  ---color3: #9a5746;
 }
 * {
   box-sizing: border-box;
@@ -35,9 +35,9 @@ body {
   justify-content: center;
   align-items: center;
   background-image: url("https://images.pexels.com/photos/13444726/pexels-photo-13444726.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-  background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .help {
@@ -47,7 +47,7 @@ body {
 
 /* Contenido principal */
 .contenido-principal {
-  width: 750px;
+  max-width: 750px;
   padding: 20px;
   background: rgba(200, 121, 91, 0.5); /* Fondo semi-transparente */
   backdrop-filter: blur(10px); /* Aplica el desenfoque al fondo */
@@ -61,18 +61,21 @@ body {
   align-items: center;
   width: 100%;
   height: 250px;
-  padding: 20px;
+  padding: 5px 20px;
   border-radius: 5px;
 }
+
 .caja-vidas {
-    background-color: var(---color3);
-    padding: 10px;
-    color: var(---color2);
-    border-radius: 5px;
+  background-color: var(---color3);
+  padding: 10px;
+  color: var(---color2);
+  border-radius: 5px;
 }
 
-.caja-vidas label{
-    font-weight: bold;
+.caja-vidas label {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
 }
 
 .caja-vidas-restantes {
@@ -94,7 +97,6 @@ body {
   justify-content: center;
   background-color: var(---color3);
   border-radius: 5px;
-  
 }
 .letra-palabra {
   /* border-bottom: 2px var(---colorF) solid;
@@ -123,9 +125,9 @@ body {
   cursor: pointer;
   border-radius: 5px;
 }
-.letras button:hover{
-    background-color: var(---color1);
-    color: var(---colorF);
+.letras button:hover {
+  background-color: var(---color1);
+  color: var(---colorF);
 }
 
 .letras-arriba,
@@ -149,11 +151,35 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: none;
 }
 
 .parte img {
   width: 100%;
   height: auto;
+}
+
+@media (max-width: 600px) {
+  /* Contenido principal */
+  .contenido-principal {
+    padding: 10px;
+    margin: 10px;
+  }
+  .caja-informacion {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 5px 20px;
+  }
+  .ahorcado-container {
+    margin-left: 5%;
+    height: 254px;
+    /* margin: 20px auto;
+    border-bottom: 1px solid #000;
+    background: #f0f0f0; */
+  }
+  .caja-teclado {
+    padding: 10px 0;
+  }
 }
