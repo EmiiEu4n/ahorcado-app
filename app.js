@@ -199,6 +199,7 @@ function VerificarEstadoJuego() {
       title: "¡Felicidades! 😎",
       text: "Has adivinado la palabra: " + palabra,
       confirmButtonText: "Siguiente Palabra",
+      allowOutsideClick: false,
     });
     SiguientePalabra();
   } else if (vidasRestantes < 1 && estadoPalabra == "incompleto") {
@@ -206,16 +207,14 @@ function VerificarEstadoJuego() {
       title: "¡Has perdido! 😢",
       text: "La palabra era " + palabra,
       confirmButtonText: "Jugar Otra Vez",
-      
-      // preConfirm: () => {
-      //   // Esta función se ejecutará cuando el usuario haga clic en el botón "Jugar Otra Vez"
-      //   palabra = "-"; // Resetear la palabra
-      //   return new Promise((resolve) => {
-          
-      //   });
-      // },
+      allowOutsideClick: false,
+      preConfirm: () => {
+        palabra = "-"; // Resetear la palabra
+        return new Promise((resolve) => {
+          location.reload();
+        });
+      },
     });
-    setTimeout(() => location.reload(), 2000);
   }
 }
 
@@ -230,8 +229,17 @@ function SiguientePalabra() {
   if (palabras.length != 0) {
     longitud = palabra.length;
   } else {
-    alert("¡Enhorabuena!, te has salvado. Eres el ganador.");
-    setTimeout(() => location.reload(), 2000);
+    Swal.fire({
+      title: "¡Salvado! 🙌",
+      text: "¡Has vivido para contarlo!",
+      confirmButtonText: "Cool",
+      allowOutsideClick: false,
+      preConfirm: () => {
+        return new Promise((resolve) => {
+          location.reload();
+        });
+      },
+    });
   }
   letrasAdivinadas = Array(longitud).fill("_"); // Inicializar con "_"
   palabraAdivinarElement.innerText = letrasAdivinadas.join(" ");
